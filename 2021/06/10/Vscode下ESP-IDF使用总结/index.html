@@ -20,21 +20,19 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="目录切换 cd 目录创建 mkdir 查看目录内容 ls [-l|a] [dir]">
+  <meta name="description" content="环境 Ubuntu 18.04.5 LTS &#x2F; Windows 7 VScode 1.56.2 ESP32-S2-Kaluga-Kit">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux常用命令总结">
-<meta property="og:url" content="http://yoursite.com/2021/06/04/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:title" content="Vscode 下 ESP-IDF 使用总结">
+<meta property="og:url" content="http://yoursite.com/2021/06/10/Vscode%E4%B8%8BESP-IDF%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="FariyBlog">
-<meta property="og:description" content="目录切换 cd 目录创建 mkdir 查看目录内容 ls [-l|a] [dir]">
+<meta property="og:description" content="环境 Ubuntu 18.04.5 LTS &#x2F; Windows 7 VScode 1.56.2 ESP32-S2-Kaluga-Kit">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190428140017647.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1Jvb2tpZXhpYW9NdV9h,size_16,color_FFFFFF,t_70">
-<meta property="article:published_time" content="2021-06-03T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-06-04T07:07:34.239Z">
+<meta property="article:published_time" content="2021-06-09T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-06-10T09:19:40.490Z">
 <meta property="article:author" content="Liu Zhongwei">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190428140017647.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1Jvb2tpZXhpYW9NdV9h,size_16,color_FFFFFF,t_70">
 
-<link rel="canonical" href="http://yoursite.com/2021/06/04/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/">
+<link rel="canonical" href="http://yoursite.com/2021/06/10/Vscode%E4%B8%8BESP-IDF%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/">
 
 
 <script id="page-configurations">
@@ -47,7 +45,7 @@
   };
 </script>
 
-  <title>Linux常用命令总结 | FariyBlog</title>
+  <title>Vscode 下 ESP-IDF 使用总结 | FariyBlog</title>
   
 
 
@@ -152,7 +150,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/06/04/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/06/10/Vscode%E4%B8%8BESP-IDF%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -165,7 +163,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Linux常用命令总结
+          Vscode 下 ESP-IDF 使用总结
         </h1>
 
         <div class="post-meta">
@@ -176,7 +174,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-06-04 00:00:00 / Modified: 15:07:34" itemprop="dateCreated datePublished" datetime="2021-06-04T00:00:00+08:00">2021-06-04</time>
+              <time title="Created: 2021-06-10 00:00:00 / Modified: 17:19:40" itemprop="dateCreated datePublished" datetime="2021-06-10T00:00:00+08:00">2021-06-10</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -199,42 +197,48 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <ul>
-<li>目录切换 <code>cd</code></li>
-<li>目录创建 <code>mkdir</code></li>
-<li>查看目录内容 <code>ls [-l|a] [dir]</code></li>
+        <h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><ul>
+<li>Ubuntu 18.04.5 LTS / Windows 7</li>
+<li>VScode 1.56.2</li>
+<li>ESP32-S2-Kaluga-Kit</li>
 </ul>
-<p><img src="https://img-blog.csdnimg.cn/20190428140017647.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1Jvb2tpZXhpYW9NdV9h,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 <span id="more"></span>
 
-<ul>
-<li><p>权限修改 <code>chmod [a|u|g|o][+|-|=][r|w|x|-] file</code> </p>
-</li>
-<li><p>文件搜索 <code>find [dir] [-name file/dir]</code></p>
-</li>
-<li><p>文件重命名/移动 <code>mov</code></p>
-</li>
-<li><p>复制 <code>cp [-r] src des</code></p>
-</li>
-<li><p>文件内容显示</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat file		# 显示文件所有的内容</span><br><span class="line">more file		# 显示一屏就暂停</span><br><span class="line">less file		# 向前向后翻页显示文件</span><br><span class="line">head [-n num] file 		# 显示文件前num(默认10)行</span><br><span class="line">tail [-n num] file		# 显示文件后num(默认10)行</span><br></pre></td></tr></table></figure></li>
-<li><p>创建文件 <code>touch</code></p>
-</li>
-<li><p>文件压缩/解压</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">tar [options] des src</span><br><span class="line">[options]: 	-c	压缩</span><br><span class="line">			-x	解压</span><br><span class="line">			-v  显示过程详细信息</span><br><span class="line">			-j	bzip2</span><br><span class="line">			-z	gzip</span><br><span class="line">examples:</span><br><span class="line">tar -cjf test.tar.bz2 test	# 将 test 压缩成 test.tar.bz2</span><br><span class="line">tar -xjf test.tar.bz2		# 将 test.tar.bz2 解压为 test</span><br><span class="line">tar -czf test.tar.gz test	# 将 test 压缩成 test.tar.gz</span><br><span class="line">tar -xzf test.tar.gz		# 将 test.tar.gz 解压为 test</span><br></pre></td></tr></table></figure></li>
-<li><p>查看当前路径 <code>pwd</code></p>
-</li>
-<li><p>查看进程 <code>ps [a|u|x]</code></p>
-</li>
-<li><p>关闭进程 <code>kill -9 process_id</code></p>
-</li>
-<li><p>通过管道查找字符串 <code>ll | grep test</code></p>
-</li>
-<li><p>关机 <code>shutdown -h now</code></p>
-</li>
-<li><p>重启 <code>reboot</code></p>
-</li>
+<h1 id="IDE-安装"><a href="#IDE-安装" class="headerlink" title="IDE 安装"></a>IDE 安装</h1><p>下载安装包后安装即可.</p>
+<h1 id="IDF-环境搭建"><a href="#IDF-环境搭建" class="headerlink" title="IDF 环境搭建"></a>IDF 环境搭建</h1><ul>
+<li>在 <strong>VScode</strong> 插件市场下载插件 <strong>Espressif IDF</strong>.</li>
+<li>安装好 <a target="_blank" rel="noopener" href="https://github.com/espressif/vscode-esp-idf-extension">espressif/vscode-esp-idf-extension</a> 中 <em><strong>Prerequisites</strong></em> 相应平台的软件依赖.</li>
+<li>按下 <strong>F1</strong> 打开命令行, 输入 <code>ESP-IDF: Configure ESP-IDF extension</code>, 选择合适的初始化模式<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- EXPRESS             <span class="regexp">//</span> 快速安装, 适合快速入门</span><br><span class="line">- ADVANCED            <span class="regexp">//</span> 自定义配置</span><br><span class="line">- USE EXISTING SETUP  <span class="regexp">//</span> 使用已有 ESP-IDF</span><br></pre></td></tr></table></figure></li>
+<li><strong>Select download server:</strong> 选择 <strong>Espressif</strong> 相对 <strong>Github</strong> 更快。</li>
 </ul>
+<h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h2><p><span style="color:red">通过<a target="_blank" rel="noopener" href="https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32s2/get-started/index.html#get-started-set-up-env">文档</a>中”第四步:设置环境变量”, 可能无法将 ESP-IDF 工具的路径加入系统环境变量 <strong>PATH</strong>, 所以需要人为确认是否成功设置了环境变量. 如果设置失败, 可以手动将命令执行窗口中输出的路径添加到 <strong>PATH</strong> 中.</span></p>
+<h1 id="新建工程"><a href="#新建工程" class="headerlink" title="新建工程"></a>新建工程</h1><ul>
+<li>参考<a target="_blank" rel="noopener" href="https://github.com/espressif/vscode-esp-idf-extension/blob/master/docs/tutorial/basic_use.md">文档</a>.</li>
+</ul>
+<h2 id="基于例程"><a href="#基于例程" class="headerlink" title="基于例程"></a>基于例程</h2><ul>
+<li>命令行输入 <code>ESP-IDF: Show Examples Projects</code>, 选择当前 ESP-IDF, 出现的界面显示了所有的例程.</li>
+<li>选择 <code>blink</code> 并点击 <code>Create project using example blink</code>, 指定保存目录后会自动切换到工程.</li>
+</ul>
+<h1 id="配置-amp-编译-amp-烧录"><a href="#配置-amp-编译-amp-烧录" class="headerlink" title="配置&amp;编译&amp;烧录"></a>配置&amp;编译&amp;烧录</h1><ul>
+<li>命令行输入 <code>ESP-IDF: Set Espressif device target</code>, 根据实际芯片设置.</li>
+<li>命令行输入 <code>ESP-IDF: SDK Configuration editor</code>, 可以对工程进行配置.(VScode 左下角有快捷图标)</li>
+<li>命令行输入 <code>ESP-IDF: Build your project</code>, 编译工程.(VScode 左下角有快捷图标)</li>
+<li>命令行输入 <code>ESP-IDF: Size analysis of the binaries</code>, 可以对二进制文件进行内存分析.</li>
+<li>命令行输入 <code>ESP-IDF:Device Configuration</code>, 根据目标开发板对 “Openocd Config files” 进行修改, 如:<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 对应于 ESP32-S2-Kaluga-Kit 开发板</span></span><br><span class="line"><span class="attribute">interface</span>/ftdi/esp<span class="number">32</span>s<span class="number">2</span>_kaluga_v<span class="number">1</span>.cfg,board/esp<span class="number">32</span>s<span class="number">2</span>-kaluga-<span class="number">1</span>.cfg</span><br></pre></td></tr></table></figure></li>
+<li>命令行输入 <code>ESP-IDF: Flash your project</code>, 执行烧录.(VScode 左下角有快捷图标)</li>
+<li>命令行输入 <code>ESP-IDF: Monitor your device</code>, 打开串口监视器.(VScode 左下角有快捷图标)</li>
+</ul>
+<h1 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h1><ul>
+<li>按下 <strong>F5</strong> 开启调试.</li>
+</ul>
+<h2 id="Ubuntu"><a href="#Ubuntu" class="headerlink" title="Ubuntu"></a>Ubuntu</h2><p><span style="color:red">遇到的问题</span>:</p>
+<ul>
+<li>有时开启会报错, 但再次开启可以正常运行.</li>
+<li>在不设断点的情况下, 点击”继续”按钮后调试功能卡死.</li>
+<li>在设置一个断点的情况下, 点击”继续”按钮后能够在该处停止运行, 但再次点击后,程序不能在断点处停止, 此后程序运行异常.</li>
+<li>“单步运行”和”观察变量”功能正常.</li>
+</ul>
+<h2 id="Window"><a href="#Window" class="headerlink" title="Window"></a>Window</h2><p><span style="color:red">无法开启调试.</span></p>
 
     </div>
 
@@ -250,12 +254,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/06/04/%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83%E6%80%BB%E7%BB%93/" rel="prev" title="编程规范总结">
-      <i class="fa fa-chevron-left"></i> 编程规范总结
+    <a href="/2021/06/08/%E9%80%9A%E8%BF%87%20Doxygen+Breathe+Sphinx%20%E7%94%9F%E6%88%90%E4%BB%A3%E7%A0%81%E6%96%87%E6%A1%A3/" rel="prev" title="通过 Doxygen+Breathe+Sphinx 生成代码文档">
+      <i class="fa fa-chevron-left"></i> 通过 Doxygen+Breathe+Sphinx 生成代码文档
     </a></div>
       <div class="post-nav-item">
-    <a href="/2021/06/04/Git%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/" rel="next" title="Git使用总结">
-      Git使用总结 <i class="fa fa-chevron-right"></i>
+    <a href="/2021/06/10/Eclipse%E4%B8%8BESP-IDF%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/" rel="next" title="Eclipse 下 ESP-IDF 使用总结">
+      Eclipse 下 ESP-IDF 使用总结 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -315,6 +319,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IDE-%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">IDE 安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IDF-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-number">3.</span> <span class="nav-text">IDF 环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows"><span class="nav-number">3.1.</span> <span class="nav-text">Windows</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">新建工程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E4%BE%8B%E7%A8%8B"><span class="nav-number">4.1.</span> <span class="nav-text">基于例程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-amp-%E7%BC%96%E8%AF%91-amp-%E7%83%A7%E5%BD%95"><span class="nav-number">5.</span> <span class="nav-text">配置&amp;编译&amp;烧录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B0%83%E8%AF%95"><span class="nav-number">6.</span> <span class="nav-text">调试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ubuntu"><span class="nav-number">6.1.</span> <span class="nav-text">Ubuntu</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Window"><span class="nav-number">6.2.</span> <span class="nav-text">Window</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

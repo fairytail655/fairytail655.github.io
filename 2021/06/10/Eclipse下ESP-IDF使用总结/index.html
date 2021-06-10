@@ -29,7 +29,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://yoursite.com/2021/06/10/Eclipse%E4%B8%8BESP-IDF%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/1.png">
 <meta property="article:published_time" content="2021-06-09T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-06-10T07:01:57.810Z">
+<meta property="article:modified_time" content="2021-06-10T08:37:23.133Z">
 <meta property="article:author" content="Liu Zhongwei">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yoursite.com/2021/06/10/Eclipse%E4%B8%8BESP-IDF%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/1.png">
@@ -176,7 +176,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-06-10 00:00:00 / Modified: 15:01:57" itemprop="dateCreated datePublished" datetime="2021-06-10T00:00:00+08:00">2021-06-10</time>
+              <time title="Created: 2021-06-10 00:00:00 / Modified: 16:37:23" itemprop="dateCreated datePublished" datetime="2021-06-10T00:00:00+08:00">2021-06-10</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -208,6 +208,7 @@
 
 <h1 id="IDE-安装"><a href="#IDE-安装" class="headerlink" title="IDE 安装"></a>IDE 安装</h1><p><a target="_blank" rel="noopener" href="https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/2021-03/R/eclipse-cpp-2021-03-R-linux-gtk-x86_64.tar.gz">下载</a>解压后目录里有可执行文件 <code>eclipse</code>, 可以直接运行而无需安装 (注意是 <strong>for C/C++</strong> 版本 ).</p>
 <h1 id="IDF-环境搭建"><a href="#IDF-环境搭建" class="headerlink" title="IDF 环境搭建"></a>IDF 环境搭建</h1><p>按照 <a target="_blank" rel="noopener" href="https://github.com/espressif/idf-eclipse-plugin#esp-idf-eclipse-plugin">espressif/idf-eclipse-plugin</a> 中 <strong>Installing ESP-IDF</strong> 和 <strong>Installing ESP-IDF Tools</strong> 两节进行.</p>
+<h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h2><p><span style="color:red">通过<a target="_blank" rel="noopener" href="https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32s2/get-started/index.html#get-started-set-up-env">文档</a>中”第四步:设置环境变量”, 可能无法将 ESP-IDF 工具的路径加入系统环境变量 <strong>PATH</strong>, 所以需要人为确认是否成功设置了环境变量. 如果设置失败, 可以手动将命令执行窗口中输出的路径添加到 <strong>PATH</strong> 中.</span></p>
 <h1 id="新建工程"><a href="#新建工程" class="headerlink" title="新建工程"></a>新建工程</h1><p>按照 <a target="_blank" rel="noopener" href="https://github.com/espressif/idf-eclipse-plugin#esp-idf-eclipse-plugin">espressif/idf-eclipse-plugin</a> 中 <strong>Create a new Project</strong> 节进行.</p>
 <h1 id="编译-amp-烧录程序"><a href="#编译-amp-烧录程序" class="headerlink" title="编译&amp;烧录程序"></a>编译&amp;烧录程序</h1><p>按照 <a target="_blank" rel="noopener" href="https://github.com/espressif/idf-eclipse-plugin#esp-idf-eclipse-plugin">espressif/idf-eclipse-plugin</a> 中 <strong>Configuring Launch target</strong>, <strong>Compiling the Project</strong>, <strong>Flashing the Project</strong> 三节进行.</p>
 <ul>
@@ -228,7 +229,7 @@
 <li><p>重启 <code>udev</code></p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo udevadm trigger</span><br><span class="line">sudo reboot</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><ul>
+<h3 id="Windows-1"><a href="#Windows-1" class="headerlink" title="Windows"></a>Windows</h3><ul>
 <li><p>要按照<a target="_blank" rel="noopener" href="https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32s2/api-guides/jtag-debugging/configure-ft2232h-jtag.html">文档</a>配置驱动, 否则运行 <code>openocd -f board/esp32s2-kaluga-1.cfg</code> 可能会报错, 如下:</p>
 <figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">For bug reports, read</span><br><span class="line">        http://openocd.org/doc/doxygen/bugs.html</span><br><span class="line">Info : Listening on port 6666 for tcl connections</span><br><span class="line">Info : Listening on port 4444 for telnet connections</span><br><span class="line"><span class="keyword">Error: </span>libusb_open() failed with LIBUSB_ERROR_NOT_FOUND</span><br><span class="line"><span class="keyword">Error: </span>no device found</span><br><span class="line"><span class="keyword">Error: </span>unable to open ftdi device with vid 0403, pid 6010, description &#x27;*&#x27;, serial &#x27;*&#x27; at bus location &#x27;*&#x27;</span><br><span class="line"><span class="keyword">Error: </span>no device found</span><br><span class="line"><span class="keyword">Error: </span>unable to open ftdi device with vid 0403, pid 6014, description &#x27;*&#x27;, serial &#x27;*&#x27; at bus location &#x27;*&#x27;</span><br><span class="line"></span><br><span class="line">Assertion failed!</span><br></pre></td></tr></table></figure></li>
 <li><p><span style="color:red">本环境下安装 v2.12.36 版本驱动存在问题, 安装 v2.12.28 版本正常.</span></p>
@@ -241,7 +242,7 @@
 <h3 id="Ubuntu-1"><a href="#Ubuntu-1" class="headerlink" title="Ubuntu"></a>Ubuntu</h3><ul>
 <li>如果直接使用 <strong>VSCode</strong> 插件下载的 <strong>ESP-IDF</strong>, 可能会出现 gdb 超时的问题, 可以通过 <strong>Eclipse</strong> 插件重新下载 <strong>ESP-IDF</strong> 来解决.<span style="color:red"> 除此之外, 可以使用下一节的方法进行调试.</span></li>
 </ul>
-<h3 id="Windows-1"><a href="#Windows-1" class="headerlink" title="Windows"></a>Windows</h3><ul>
+<h3 id="Windows-2"><a href="#Windows-2" class="headerlink" title="Windows"></a>Windows</h3><ul>
 <li><span style="color:red">点击调试按钮没有反应, 暂未解决.</span></li>
 </ul>
 <h2 id="使用-“ESP-IDF-GDB-OpenOCD-Debugging”-调试"><a href="#使用-“ESP-IDF-GDB-OpenOCD-Debugging”-调试" class="headerlink" title="使用 “ESP-IDF GDB OpenOCD Debugging” 调试"></a>使用 “ESP-IDF GDB OpenOCD Debugging” 调试</h2><ul>
@@ -255,7 +256,7 @@
 <li><p>配置完成后点击 <em><strong>Debug</strong></em> 可直接调试, 无需在终端打开 <strong>openocd</strong>.</p>
 </li>
 </ul>
-<h3 id="Windows-2"><a href="#Windows-2" class="headerlink" title="Windows"></a>Windows</h3><ul>
+<h3 id="Windows-3"><a href="#Windows-3" class="headerlink" title="Windows"></a>Windows</h3><ul>
 <li>所有信息自动配置完成, 但是默认使用了 Linux 下的环境变量, 所以需要修改命令为实际路径.</li>
 <li><span style="color:red">开启调试会报错, 暂未解决.</span><figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Error </span>in final launch sequence</span><br><span class="line">Failed to execute MI command:</span><br><span class="line">-target-select remote localhost:3333</span><br><span class="line"><span class="keyword">Error </span>message from debugger back end:</span><br><span class="line">Remote communication error.  Target disconnected.: Success.</span><br><span class="line">Failed to execute MI command:</span><br><span class="line">-target-select remote localhost:3333</span><br><span class="line"><span class="keyword">Error </span>message from debugger back end:</span><br><span class="line">Remote communication error.  Target disconnected.: Success.</span><br><span class="line">Remote communication error.  Target disconnected.: Success.</span><br></pre></td></tr></table></figure></li>
 </ul>
@@ -274,8 +275,8 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/06/08/%E9%80%9A%E8%BF%87%20Doxygen+Breathe+Sphinx%20%E7%94%9F%E6%88%90%E4%BB%A3%E7%A0%81%E6%96%87%E6%A1%A3/" rel="prev" title="通过 Doxygen+Breathe+Sphinx 生成代码文档">
-      <i class="fa fa-chevron-left"></i> 通过 Doxygen+Breathe+Sphinx 生成代码文档
+    <a href="/2021/06/10/Vscode%E4%B8%8BESP-IDF%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/" rel="prev" title="Vscode 下 ESP-IDF 使用总结">
+      <i class="fa fa-chevron-left"></i> Vscode 下 ESP-IDF 使用总结
     </a></div>
       <div class="post-nav-item"></div>
     </div>
@@ -336,7 +337,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IDE-%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">IDE 安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IDF-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-number">3.</span> <span class="nav-text">IDF 环境搭建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">新建工程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%96%E8%AF%91-amp-%E7%83%A7%E5%BD%95%E7%A8%8B%E5%BA%8F"><span class="nav-number">5.</span> <span class="nav-text">编译&amp;烧录程序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B0%83%E8%AF%95"><span class="nav-number">6.</span> <span class="nav-text">调试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#openocd"><span class="nav-number">6.1.</span> <span class="nav-text">openocd</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Ubuntu"><span class="nav-number">6.1.1.</span> <span class="nav-text">Ubuntu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows"><span class="nav-number">6.1.2.</span> <span class="nav-text">Windows</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-%E2%80%9CGDB-Hardware-Debugging%E2%80%9D-%E8%B0%83%E8%AF%95"><span class="nav-number">6.2.</span> <span class="nav-text">使用 “GDB Hardware Debugging” 调试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Ubuntu-1"><span class="nav-number">6.2.1.</span> <span class="nav-text">Ubuntu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows-1"><span class="nav-number">6.2.2.</span> <span class="nav-text">Windows</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-%E2%80%9CESP-IDF-GDB-OpenOCD-Debugging%E2%80%9D-%E8%B0%83%E8%AF%95"><span class="nav-number">6.3.</span> <span class="nav-text">使用 “ESP-IDF GDB OpenOCD Debugging” 调试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Ubuntu-2"><span class="nav-number">6.3.1.</span> <span class="nav-text">Ubuntu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows-2"><span class="nav-number">6.3.2.</span> <span class="nav-text">Windows</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IDE-%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">IDE 安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IDF-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-number">3.</span> <span class="nav-text">IDF 环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows"><span class="nav-number">3.1.</span> <span class="nav-text">Windows</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">新建工程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%96%E8%AF%91-amp-%E7%83%A7%E5%BD%95%E7%A8%8B%E5%BA%8F"><span class="nav-number">5.</span> <span class="nav-text">编译&amp;烧录程序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B0%83%E8%AF%95"><span class="nav-number">6.</span> <span class="nav-text">调试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#openocd"><span class="nav-number">6.1.</span> <span class="nav-text">openocd</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Ubuntu"><span class="nav-number">6.1.1.</span> <span class="nav-text">Ubuntu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows-1"><span class="nav-number">6.1.2.</span> <span class="nav-text">Windows</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-%E2%80%9CGDB-Hardware-Debugging%E2%80%9D-%E8%B0%83%E8%AF%95"><span class="nav-number">6.2.</span> <span class="nav-text">使用 “GDB Hardware Debugging” 调试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Ubuntu-1"><span class="nav-number">6.2.1.</span> <span class="nav-text">Ubuntu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows-2"><span class="nav-number">6.2.2.</span> <span class="nav-text">Windows</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-%E2%80%9CESP-IDF-GDB-OpenOCD-Debugging%E2%80%9D-%E8%B0%83%E8%AF%95"><span class="nav-number">6.3.</span> <span class="nav-text">使用 “ESP-IDF GDB OpenOCD Debugging” 调试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Ubuntu-2"><span class="nav-number">6.3.1.</span> <span class="nav-text">Ubuntu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows-3"><span class="nav-number">6.3.2.</span> <span class="nav-text">Windows</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -349,7 +350,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
