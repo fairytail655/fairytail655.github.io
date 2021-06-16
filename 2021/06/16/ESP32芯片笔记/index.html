@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="整体框架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ESP32 芯片笔记">
+<meta property="og:url" content="http://yoursite.com/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="FariyBlog">
+<meta property="og:description" content="整体框架">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/a7ab087afd3a781db9598bdaf10ad307.png">
+<meta property="og:image" content="http://yoursite.com/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/01befe492f4e0888c10162273d973d11.png">
+<meta property="og:image" content="http://yoursite.com/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/508ae36a7b80bce2989e8b5b5dd3cc25.png">
+<meta property="og:image" content="http://yoursite.com/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/3755a491ad6a0b6f84d94b925e1e052b.png">
+<meta property="og:image" content="http://yoursite.com/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/40e740df4e9b217fc2a3647ce43b5511.png">
+<meta property="og:image" content="http://yoursite.com/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/e2e52946387ad66208cef2e640075a21.png">
+<meta property="og:image" content="http://yoursite.com/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/21b5a74caa279743708dced6323ffb1c.png">
+<meta property="og:image" content="http://yoursite.com/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/fb19c143d8b2803c4992da3ac6c4bba8.png">
+<meta property="og:image" content="http://yoursite.com/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/65d3b6e9b6ed976f14d378a2b60056d1.png">
+<meta property="og:image" content="http://yoursite.com/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/f07e5953fdc9efc24bb305f0f2ca1449.png">
+<meta property="article:published_time" content="2021-06-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-06-16T03:45:50.608Z">
+<meta property="article:author" content="Liu Zhongwei">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/a7ab087afd3a781db9598bdaf10ad307.png">
+
+<link rel="canonical" href="http://yoursite.com/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>ESP32 芯片笔记 | FariyBlog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">FariyBlog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Liu Zhongwei">
+      <meta itemprop="description" content="Embeded System | C | Espressif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FariyBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ESP32 芯片笔记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-06-16 00:00:00 / Modified: 11:45:50" itemprop="dateCreated datePublished" datetime="2021-06-16T00:00:00+08:00">2021-06-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Intern/" itemprop="url" rel="index"><span itemprop="name">Intern</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="整体框架"><a href="#整体框架" class="headerlink" title="整体框架"></a>整体框架</h1><p><img src="/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/a7ab087afd3a781db9598bdaf10ad307.png" alt="截图"></p>
+<span id="more"></span>
+
+<h1 id="芯片命名"><a href="#芯片命名" class="headerlink" title="芯片命名"></a>芯片命名</h1><p><img src="/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/01befe492f4e0888c10162273d973d11.png" alt="截图"></p>
+<h1 id="存储器"><a href="#存储器" class="headerlink" title="存储器"></a>存储器</h1><ul>
+<li>RTC 存储器为 SRAM.</li>
+<li>地址映射:<img src="/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/508ae36a7b80bce2989e8b5b5dd3cc25.png" alt="截图"><img src="/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/3755a491ad6a0b6f84d94b925e1e052b.png" alt="截图"><img src="/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/40e740df4e9b217fc2a3647ce43b5511.png" alt="截图"></li>
+<li>Internal SRAM1 通过<strong>数据总线</strong>和<strong>指令总线</strong>访问的字(32位)是<strong>逆序</strong>的, 如: 0x3FFE_0000 与 0x400B_FFFC 访问到相同的字.</li>
+<li>PRO_CPU 通过<strong>数据总线</strong>和<strong>指令总线</strong>访问 <strong>RTC FAST Memory</strong> 的字(32位)是同序的, 如: 0x3FF8_0000 与 0x400C_0000 访问到相同的字.</li>
+<li>开启 Cache 功能后, <strong>POOL0</strong> 或者 <strong>POOL1</strong> 只作为 cache memory 使用,不能复用作为<strong>指令总线</strong>的访问区域.</li>
+<li>每个 CPU 访问的 <strong>PID Controller</strong> 是独立的(APP_CPU 和 PRO_CPU 访问该外设同一地址的数据不同).</li>
+<li>外设中只有 <strong>SDIO Slave</strong> 的地址空间不连续.</li>
+<li>使用 (0x3FF40000 + n) 地址和使用 (0x60000000 + n) 地址访问的内容是相同的,其中 n = 0 ~ 0x3FFFF.</li>
+<li>相比于通过 AHB 访问外设, CPU 通过 DPORT 访问外设效率更高. 但是 DPORT 有预测性读 (speculative read) 的特点,不能保证每一次的读访问都是真实有效的. 另外,DPORT 会打乱总线上的读写操作的先后顺序以提升性能, 这可能会导致对读写操作的先后顺序有严格要求的程序发生崩溃. 此外使用 AHB 总线读 FIFO 会出现无法预知的错误.</li>
+</ul>
+<h1 id="Boot"><a href="#Boot" class="headerlink" title="Boot"></a>Boot</h1><ul>
+<li>共有 5 个 Strapping 管脚: <strong>MTDI</strong>, <strong>GPIO0</strong>, <strong>GPIO2</strong>, <strong>MTDO</strong>, <strong>GPIO5</strong>.</li>
+<li>启动模式:<img src="/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/e2e52946387ad66208cef2e640075a21.png" alt="截图"></li>
+</ul>
+<h1 id="中断"><a href="#中断" class="headerlink" title="中断"></a>中断</h1><ul>
+<li>中断结构:<img src="/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/21b5a74caa279743708dced6323ffb1c.png" alt="截图"></li>
+<li>输入为 <strong>71</strong> 个外部中断源, 输出给每个 CPU 各自 <strong>26</strong> 个外部中断(共 <strong>52</strong> 个).</li>
+<li>71 个中断源中, <strong>GPIO_INTERRUPT_PRO</strong> 和 <strong>GPIO_INTERRUPT_PRO_NMI</strong> 只可以分配给 <strong>PRO_CPU</strong>, <strong>GPIO_INTERRUPT_APP</strong> 和 <strong>GPIO_INTERRUPT_APP_NMI</strong> 只可以分配给 <strong>APP_CPU</strong>.</li>
+<li>两个 CPU(PRO_CPU 和 APP_CPU)各有 <strong>32</strong> 个中断, 其中 <strong>26</strong> 个为<strong>外部中断</strong>, <strong>6</strong> 个为<strong>内部中断</strong>.</li>
+<li>中断优先级:<img src="/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/fb19c143d8b2803c4992da3ac6c4bba8.png" alt="截图"></li>
+<li>能够暂时屏蔽所有被分配到 CPU 的外部中断源的 <strong>NMI</strong> 中断信号.</li>
+</ul>
+<h1 id="复位"><a href="#复位" class="headerlink" title="复位"></a>复位</h1><ul>
+<li>复位影响范围:<img src="/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/65d3b6e9b6ed976f14d378a2b60056d1.png" alt="截图"></li>
+<li><strong>PRO_CPU</strong> 可以通过读取寄存器 <strong>RTC_CNTL_RESET_CAUSE_PROCPU</strong> 来获取复位源, <strong>APP_CPU</strong> 则可以通过读取寄存器 <strong>RTC_CNTL_RESET_CAUSE_APPCPU</strong> 来获取复位源.</li>
+</ul>
+<h1 id="时钟"><a href="#时钟" class="headerlink" title="时钟"></a>时钟</h1><ul>
+<li>时钟源<ul>
+<li><strong>PLL_CLK</strong>, 320 MHz 或 480 MHz 内部 PLL 时钟</li>
+<li><strong>XTL_CLK</strong>, 2 ~ 40 MHz 外部晶振时钟</li>
+<li><strong>XTL32K_CLK</strong>, 32 KHz 外部晶振时钟</li>
+<li><strong>RTC8M_CLK</strong>, 8 MHz 内部时钟, 频率可调</li>
+<li><strong>RTC8M_D256_CLK</strong> 由 RTC8M_CLK 经 256 分频所得, 频率为(RTC8M_CLK/256). 当 RTC8M_CLK 的初始频率为 8 MHz 时, 该时钟以 31.250 KHz 的频率运行</li>
+<li><strong>RTC_CLK</strong>, 150 KHz 内部低功耗时钟, 频率可调</li>
+<li><strong>APLL_CLK</strong>, 16 ~ 128 MHz 内部 Audio PLL 时钟</li>
+</ul>
+</li>
+<li>时钟信号<ul>
+<li>CPU 时钟.</li>
+<li>外设时钟: <code>APB_CLK</code>, <code>REF_TICK</code>, <code>LEDC_SCLK</code>, <code>APLL_CLK</code> 和 <code>PLL_D2_CLK</code>.</li>
+</ul>
+</li>
+<li>Wi-Fi 和 BT 必须在 APB_CLK 时钟源选择 PLL_CLK 下才能工作.</li>
+</ul>
+<h1 id="GPIO"><a href="#GPIO" class="headerlink" title="GPIO"></a>GPIO</h1><p><img src="/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/f07e5953fdc9efc24bb305f0f2ca1449.png" alt="截图"></p>
+<ul>
+<li>34 个 物理 GPIO pad: 0­-19, 21-­23, 25-­27, 32­-39. 其中 34-39 仅用作<strong>输入</strong>.</li>
+<li>每个 pad 可以配置成 <strong>GPIO 功能</strong>或者<strong>直连功能</strong>.</li>
+<li>162 个<strong>外设输入信号</strong>都可以选择任意一个 GPIO pad 的输入信号, 每个 GPIO pad 的输出信号可来自 176 个<strong>外设输出信号</strong>中的任意一个.</li>
+<li>同一个输入 pad 上可以同时绑定多个内部输入信号, 某一个外设的输出信号可以同时从多个 pad 输出.</li>
+<li>每个 IO pad(包括 RTC pad)都有单独的 hold 功能.</li>
+</ul>
+<h1 id="DPort"><a href="#DPort" class="headerlink" title="DPort"></a>DPort</h1><p>系统通过 DPort 寄存器中的配置寄存器对各个模块进行配置.</p>
+<ul>
+<li><strong>APP_CPU</strong> 从 ROM code 启动之后, 会跳转到 <strong>DPORT_APPCPU_BOOT_ADDR</strong> 寄存器中的地址.</li>
+</ul>
+<h1 id="DMA"><a href="#DMA" class="headerlink" title="DMA"></a>DMA</h1><ul>
+<li>ESP32 中有 13 个外设都具有 DMA 功能, 这 13 个外设是: UARTn, SPIn, I2Sn、SDIO slave, SD/MMC host, EMAC, BT 和 Wi-Fi.</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/06/10/Arduino%E5%BC%80%E5%8F%91ESP32/" rel="prev" title="Arduino 开发 ESP32">
+      <i class="fa fa-chevron-left"></i> Arduino 开发 ESP32
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/06/16/ESP32-S2%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/" rel="next" title="ESP32-S2 芯片笔记">
+      ESP32-S2 芯片笔记 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B4%E4%BD%93%E6%A1%86%E6%9E%B6"><span class="nav-number">1.</span> <span class="nav-text">整体框架</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%8A%AF%E7%89%87%E5%91%BD%E5%90%8D"><span class="nav-number">2.</span> <span class="nav-text">芯片命名</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">存储器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Boot"><span class="nav-number">4.</span> <span class="nav-text">Boot</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%AD%E6%96%AD"><span class="nav-number">5.</span> <span class="nav-text">中断</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%8D%E4%BD%8D"><span class="nav-number">6.</span> <span class="nav-text">复位</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%97%B6%E9%92%9F"><span class="nav-number">7.</span> <span class="nav-text">时钟</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GPIO"><span class="nav-number">8.</span> <span class="nav-text">GPIO</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DPort"><span class="nav-number">9.</span> <span class="nav-text">DPort</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DMA"><span class="nav-number">10.</span> <span class="nav-text">DMA</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Liu Zhongwei</p>
+  <div class="site-description" itemprop="description">Embeded System | C | Espressif</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liu Zhongwei</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
