@@ -43,6 +43,12 @@
       </categories>
       
       
+        <tags>
+            
+            <tag> ESP32-S2 </tag>
+            
+        </tags>
+      
     </entry>
     
     
@@ -61,6 +67,12 @@
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> ESP32 </tag>
+            
+        </tags>
       
     </entry>
     
@@ -81,6 +93,12 @@
       </categories>
       
       
+        <tags>
+            
+            <tag> IDE </tag>
+            
+        </tags>
+      
     </entry>
     
     
@@ -99,6 +117,14 @@
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> IDE </tag>
+            
+            <tag> IDF </tag>
+            
+        </tags>
       
     </entry>
     
@@ -119,6 +145,14 @@
       </categories>
       
       
+        <tags>
+            
+            <tag> IDE </tag>
+            
+            <tag> IDF </tag>
+            
+        </tags>
+      
     </entry>
     
     
@@ -137,6 +171,12 @@
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> 文档规范 </tag>
+            
+        </tags>
       
     </entry>
     
@@ -157,6 +197,12 @@
       </categories>
       
       
+        <tags>
+            
+            <tag> Git </tag>
+            
+        </tags>
+      
     </entry>
     
     
@@ -176,6 +222,12 @@
       </categories>
       
       
+        <tags>
+            
+            <tag> Linux </tag>
+            
+        </tags>
+      
     </entry>
     
     
@@ -194,6 +246,12 @@
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> 文档规范 </tag>
+            
+        </tags>
       
     </entry>
     
