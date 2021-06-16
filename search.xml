@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>ESP32-C3 芯片笔记</title>
+      <link href="/2021/06/16/ESP32-C3%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/"/>
+      <url>/2021/06/16/ESP32-C3%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/</url>
+      
+        <content type="html"><![CDATA[<h1 id="整体框架"><a href="#整体框架" class="headerlink" title="整体框架"></a>整体框架</h1><p><img src="/2021/06/16/ESP32-C3%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/978a1540d369846bb4b4a181b88c6b50.png" alt="截图"></p><span id="more"></span><h1 id="芯片命名"><a href="#芯片命名" class="headerlink" title="芯片命名"></a>芯片命名</h1><p><img src="/2021/06/16/ESP32-C3%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/b0d34752a57f336ca1b15db23c427424.png" alt="截图"></p><h1 id="Boot"><a href="#Boot" class="headerlink" title="Boot"></a>Boot</h1><ul><li><p>共有 3 个 Strapping 管脚: <strong>GPIO2</strong>, <strong>GPIO8</strong>, <strong>GPIO9</strong>.</p></li><li><p>启动模式:</p><p><img src="/2021/06/16/ESP32-C3%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/917668e93169258d05c5bd3f94f73ad1.png" alt="截图"></p><p><img src="/2021/06/16/ESP32-C3%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/c10dfc5e257d1737181e3764f854e573.png" alt="截图"></p></li><li><p><strong>SPI Boot</strong>:</p><ul><li>常规 flash 启动方式: 支持安全启动, 程序运行在 RAM 中.</li><li>直接启动方式: 不支持安全启动, 程序直接运行在 flash 中. 如需使能这一启动方式, 确保下载至 flash 的 bin 文件其前两个字(地址:0x42000000)为 0xaebd041d</li></ul></li></ul><h1 id="CPU-地址分布"><a href="#CPU-地址分布" class="headerlink" title="CPU 地址分布"></a>CPU 地址分布</h1><p><img src="/2021/06/16/ESP32-C3%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/4e7920e83796b3f257d07d62dd65a7f8.png" alt="截图"></p><ul><li>IRAM、DRAM、DM 地址范围以外的地址空间通过 AHB 总线访问.</li></ul><h1 id="中断"><a href="#中断" class="headerlink" title="中断"></a>中断</h1><ul><li><p>中断向量:</p><p><img src="/2021/06/16/ESP32-C3%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/c5f07c2d2c818a27c60b42ea5ca58131.png" alt="截图"></p></li><li><p>15 个优先级级别, 可以分配给不同的中断.</p></li></ul><h1 id="GDMA"><a href="#GDMA" class="headerlink" title="GDMA"></a>GDMA</h1><p><img src="/2021/06/16/ESP32-C3%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/87e7affecfb61627c242a1f54f5a9ac6.png" alt="截图"></p><h1 id="存储器"><a href="#存储器" class="headerlink" title="存储器"></a>存储器</h1><ul><li>地址映射:<img src="/2021/06/16/ESP32-C3%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/c0d870276974ec0239de83d92450b1cc.png" alt="截图"><img src="/2021/06/16/ESP32-C3%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/8066fb794c42e9175bfc9558886fe747.png" alt="截图"><img src="/2021/06/16/ESP32-C3%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/8c0f5bdc176f848c144897765912ce6a.png" alt="截图"><img src="/2021/06/16/ESP32-C3%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/ce45381ba44c63048efaef761e54f17e.png" alt="截图"></li></ul><h1 id="复位"><a href="#复位" class="headerlink" title="复位"></a>复位</h1><ul><li>复位等级<img src="/2021/06/16/ESP32-C3%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/d98cf4e14d291e6bab8d9db2697b756d.png" alt="截图"></li></ul><h1 id="时钟"><a href="#时钟" class="headerlink" title="时钟"></a>时钟</h1><ul><li>时钟树:<img src="/2021/06/16/ESP32-C3%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/7f310d7afdfc39e121ca2ac15ea617c3.png" alt="截图"></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Intern </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ESP32-C3 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>ESP32-S2 芯片笔记</title>
       <link href="/2021/06/16/ESP32-S2%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/"/>
       <url>/2021/06/16/ESP32-S2%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/</url>
