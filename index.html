@@ -152,6 +152,78 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/06/18/Ubuntu%E4%B8%8BIDF&MDF%E5%A4%9A%E7%89%88%E6%9C%AC%E5%85%B1%E5%AD%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Liu Zhongwei">
+      <meta itemprop="description" content="Embeded System | C | Espressif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FariyBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/18/Ubuntu%E4%B8%8BIDF&MDF%E5%A4%9A%E7%89%88%E6%9C%AC%E5%85%B1%E5%AD%98/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-06-18 12:03:55" itemprop="dateCreated datePublished" datetime="2021-06-18T12:03:55+08:00">2021-06-18</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><ul>
+<li>Ubuntu 16.04</li>
+<li>ESP-IDF v4.2.1 , v4.3, master</li>
+<li>ESP-MDF master</li>
+</ul>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><ol>
+<li><p>从 Github 下载各个版本的 IDF/MDF 到 <code>~/esp/</code>目录下.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; <span class="built_in">ls</span> ~/esp/</span><br><span class="line">esp<span class="literal">-idf</span><span class="literal">-master</span>  esp<span class="literal">-idf</span><span class="literal">-v4</span>.<span class="number">2.1</span>  esp<span class="literal">-idf</span><span class="literal">-v4</span>.<span class="number">3</span>  esp<span class="literal">-mdf</span></span><br></pre></td></tr></table></figure></li>
+<li><p>通过任一版本 IDF/MDF 安装工具链, 如下通过<code>MDF</code>进行安装:</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; <span class="built_in">cd</span> ~/esp/esp<span class="literal">-mdf</span>/esp<span class="literal">-idf</span></span><br><span class="line">&gt;&gt;&gt; ./install.sh</span><br></pre></td></tr></table></figure></li>
+<li><p>修改<code>~/.bashrc</code>文件, 配置各个环境切换命令.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; vim ~/.bashrc</span><br><span class="line"></span><br><span class="line"><span class="comment"># 末尾增加如下几行</span></span><br><span class="line">alias get_idf_master=<span class="string">&#x27;export IDF_PATH=&quot;$HOME/esp/esp-idf-master&quot;;. $HOME/esp/esp-idf-master/export.sh&#x27;</span></span><br><span class="line">alias get_idf_42=<span class="string">&#x27;export IDF_PATH=&quot;$HOME/esp/esp-idf-v4.2.1&quot;;. $HOME/esp/esp-idf-v4.2.1/export.sh&#x27;</span></span><br><span class="line">alias get_idf_43=<span class="string">&#x27;export IDF_PATH=&quot;$HOME/esp/esp-idf-v4.3&quot;;. $HOME/esp/esp-idf-v4.3/export.sh&#x27;</span></span><br><span class="line">alias get_mdf=<span class="string">&#x27;export IDF_PATH=&quot;$HOME/esp/esp-mdf/esp-idf&quot;;. $HOME/esp/esp-mdf/export.sh&#x27;</span></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; source ~/.bashrc</span><br></pre></td></tr></table></figure></li>
+<li><p>在终端调用指定的命令, 可以切换至相应的 IDF/MDF 版本环境, 于是能够使用该环境下的<code>idf.py</code>工具.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 切换至 esp-idf-master</span></span><br><span class="line">&gt;&gt;&gt; get_idf_master</span><br><span class="line">&gt;&gt;&gt; idf.py -<span class="literal">-version</span></span><br><span class="line">ESP<span class="literal">-IDF</span> v4.<span class="number">4</span><span class="literal">-dev</span><span class="literal">-1594</span><span class="literal">-g1d7068e4b</span><span class="literal">-dirty</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换至 esp-idf-v4.2.1</span></span><br><span class="line">&gt;&gt;&gt; get_idf_42</span><br><span class="line">&gt;&gt;&gt; idf.py -<span class="literal">-version</span></span><br><span class="line">ESP<span class="literal">-IDF</span> v4.<span class="number">2.1</span><span class="literal">-dirty</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换至 esp-idf-v4.3</span></span><br><span class="line">&gt;&gt;&gt; get_idf_43</span><br><span class="line">&gt;&gt;&gt; idf.py -<span class="literal">-version</span></span><br><span class="line">ESP<span class="literal">-IDF</span> v4.<span class="number">3.0</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换至 esp-mdf</span></span><br><span class="line">&gt;&gt;&gt; get_mdf</span><br><span class="line">&gt;&gt;&gt; idf.py -<span class="literal">-version</span></span><br><span class="line">ESP<span class="literal">-IDF</span> v4.<span class="number">3</span><span class="literal">-beta3</span><span class="literal">-dirty</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/06/16/ESP32-C3%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -298,81 +370,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Liu Zhongwei">
-      <meta itemprop="description" content="Embeded System | C | Espressif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="FariyBlog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">ESP32 芯片笔记</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-06-16 00:00:00 / Modified: 15:35:41" itemprop="dateCreated datePublished" datetime="2021-06-16T00:00:00+08:00">2021-06-16</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Intern/" itemprop="url" rel="index"><span itemprop="name">Intern</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="整体框架"><a href="#整体框架" class="headerlink" title="整体框架"></a>整体框架</h1><p><img src="/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/a7ab087afd3a781db9598bdaf10ad307.png" alt="截图"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -441,7 +438,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
