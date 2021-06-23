@@ -20,22 +20,21 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="目录切换 cd 目录创建 mkdir 查看目录内容 ls [-l|a] [dir]">
+  <meta name="description" content="环境 Ubuntu18.04 &#x2F; Windows7 Eclipse 2021-03 (已安装 ESP-IDF 插件)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux常用命令总结">
-<meta property="og:url" content="http://yoursite.com/2021/06/04/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:title" content="Eclipse 下 esp-iot-solution 使用总结">
+<meta property="og:url" content="http://yoursite.com/2021/06/23/Eclipse%E4%B8%8Besp-iot-solution%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="FariyBlog">
-<meta property="og:description" content="目录切换 cd 目录创建 mkdir 查看目录内容 ls [-l|a] [dir]">
+<meta property="og:description" content="环境 Ubuntu18.04 &#x2F; Windows7 Eclipse 2021-03 (已安装 ESP-IDF 插件)">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190428140017647.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1Jvb2tpZXhpYW9NdV9h,size_16,color_FFFFFF,t_70">
-<meta property="article:published_time" content="2021-06-03T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-06-16T07:36:03.695Z">
+<meta property="article:published_time" content="2021-06-22T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-06-23T12:14:07.797Z">
 <meta property="article:author" content="Liu Zhongwei">
-<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Eclipse">
+<meta property="article:tag" content="ESP-iot-solution">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190428140017647.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1Jvb2tpZXhpYW9NdV9h,size_16,color_FFFFFF,t_70">
 
-<link rel="canonical" href="http://yoursite.com/2021/06/04/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/">
+<link rel="canonical" href="http://yoursite.com/2021/06/23/Eclipse%E4%B8%8Besp-iot-solution%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/">
 
 
 <script id="page-configurations">
@@ -48,7 +47,7 @@
   };
 </script>
 
-  <title>Linux常用命令总结 | FariyBlog</title>
+  <title>Eclipse 下 esp-iot-solution 使用总结 | FariyBlog</title>
   
 
 
@@ -158,7 +157,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/06/04/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/06/23/Eclipse%E4%B8%8Besp-iot-solution%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -171,7 +170,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Linux常用命令总结
+          Eclipse 下 esp-iot-solution 使用总结
         </h1>
 
         <div class="post-meta">
@@ -180,16 +179,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2021-06-04 00:00:00" itemprop="dateCreated datePublished" datetime="2021-06-04T00:00:00+08:00">2021-06-04</time>
+              <time title="Created: 2021-06-23 00:00:00 / Modified: 20:14:07" itemprop="dateCreated datePublished" datetime="2021-06-23T00:00:00+08:00">2021-06-23</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-06-16 15:36:03" itemprop="dateModified" datetime="2021-06-16T15:36:03+08:00">2021-06-16</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -211,41 +204,34 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <ul>
-<li>目录切换 <code>cd</code></li>
-<li>目录创建 <code>mkdir</code></li>
-<li>查看目录内容 <code>ls [-l|a] [dir]</code></li>
+        <h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><ul>
+<li>Ubuntu18.04 / Windows7</li>
+<li>Eclipse 2021-03 (已安装 ESP-IDF 插件)</li>
 </ul>
-<p><img src="https://img-blog.csdnimg.cn/20190428140017647.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1Jvb2tpZXhpYW9NdV9h,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 <span id="more"></span>
 
-<ul>
-<li><p>权限修改 <code>chmod [a|u|g|o][+|-|=][r|w|x|-] file</code> </p>
-</li>
-<li><p>文件搜索 <code>find [dir] [-name file/dir]</code></p>
-</li>
-<li><p>文件重命名/移动 <code>mov</code></p>
-</li>
-<li><p>复制 <code>cp [-r] src des</code></p>
-</li>
-<li><p>文件内容显示</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat file		# 显示文件所有的内容</span><br><span class="line">more file		# 显示一屏就暂停</span><br><span class="line">less file		# 向前向后翻页显示文件</span><br><span class="line">head [-n num] file 		# 显示文件前num(默认10)行</span><br><span class="line">tail [-n num] file		# 显示文件后num(默认10)行</span><br></pre></td></tr></table></figure></li>
-<li><p>创建文件 <code>touch</code></p>
-</li>
-<li><p>文件压缩/解压</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">tar [options] des src</span><br><span class="line">[options]: 	-c	压缩</span><br><span class="line">			-x	解压</span><br><span class="line">			-v  显示过程详细信息</span><br><span class="line">			-j	bzip2</span><br><span class="line">			-z	gzip</span><br><span class="line">examples:</span><br><span class="line">tar -cjf test.tar.bz2 test	# 将 test 压缩成 test.tar.bz2</span><br><span class="line">tar -xjf test.tar.bz2		# 将 test.tar.bz2 解压为 test</span><br><span class="line">tar -czf test.tar.gz test	# 将 test 压缩成 test.tar.gz</span><br><span class="line">tar -xzf test.tar.gz		# 将 test.tar.gz 解压为 test</span><br></pre></td></tr></table></figure></li>
-<li><p>查看当前路径 <code>pwd</code></p>
-</li>
-<li><p>查看进程 <code>ps [a|u|x]</code></p>
-</li>
-<li><p>关闭进程 <code>kill -9 process_id</code></p>
-</li>
-<li><p>通过管道查找字符串 <code>ll | grep test</code></p>
-</li>
-<li><p>关机 <code>shutdown -h now</code></p>
-</li>
-<li><p>重启 <code>reboot</code></p>
-</li>
+<h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><h2 id="获取例程"><a href="#获取例程" class="headerlink" title="获取例程"></a>获取例程</h2><p>从 <strong>esp-iot-solution/expamples/</strong> 下复制某一例程到指定位置. </p>
+<h2 id="获取工程文件"><a href="#获取工程文件" class="headerlink" title="获取工程文件"></a>获取工程文件</h2><ol>
+<li>通过 <code>File</code> -&gt; <code>New</code> -&gt; <code>Project...</code> -&gt; <code>Espressif IDF Project</code> 新建工程, 指定任意路径, 命名为 <strong>test</strong>.</li>
+<li>进入工程 <strong>test</strong> 的根目录, 可以看到 Eclipse 的工程描述文件 <code>.project</code> 和 <code>.cproject</code>(如果没有则需要开启显示隐藏文件的功能), 复制它们到例程根目录下.</li>
+<li>此后不再需要工程 <strong>test</strong> , 可以删除.</li>
+<li>修改例程的 <code>.project</code> 文件, 将工程名 <em><strong>test</strong></em> 替换为例程名(也可以不修改, 不会报错).</li>
+</ol>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="built_in">name</span>&gt;test&lt;/<span class="built_in">name</span>&gt;         <span class="comment"># 原文件</span></span><br><span class="line">&lt;<span class="built_in">name</span>&gt;例程名&lt;/<span class="built_in">name</span>&gt;       <span class="comment"># 修改后</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="在-Eclipse-中打开例程"><a href="#在-Eclipse-中打开例程" class="headerlink" title="在 Eclipse 中打开例程"></a>在 Eclipse 中打开例程</h2><p>通过 <code>File</code> -&gt; <code>Import</code> -&gt; <code>Espressif</code> -&gt; <code>Existing IDF Project</code> 导入例程, 无需填写工程名, 指定工程路径即可.</p>
+<h2 id="编译-amp-烧录-amp-调试"><a href="#编译-amp-烧录-amp-调试" class="headerlink" title="编译&amp;烧录&amp;调试"></a>编译&amp;烧录&amp;调试</h2><ol>
+<li>进入 <code>Window</code> -&gt; <code>Preferences</code> -&gt; <code>C/C++</code> -&gt; <code>Build</code> -&gt; <code>Environment</code>, 添加环境变量 <strong>IOT_SOLUTION_PATH</strong>.</li>
+</ol>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">Name:</span> IOT_SOLUTION_PATH</span><br><span class="line"><span class="symbol">Value:</span> 复制 esp-iot-solution 的路径, 不要点 Variables.</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>同 <a target="_blank" rel="noopener" href="https://fairytail655.github.io/2021/06/10/Eclipse%E4%B8%8BESP-IDF%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/">Eclipse 下 ESP-IDF 使用总结</a>.</li>
+</ol>
+<h1 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h1><ul>
+<li>编译报错如下:<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">CMake Warning <span class="keyword">at</span> CMakeLists.txt:<span class="number">9</span> (message):</span><br><span class="line">  Can&#x27;t detect IOT_SOLUTION_PATH <span class="keyword">in</span> your environment, we infer <span class="keyword">it</span> <span class="keyword">is</span></span><br><span class="line">  ... <span class="comment"># 某个路径</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">CMake Error <span class="keyword">at</span> CMakeLists.txt:<span class="number">12</span> (include):</span><br><span class="line">  include could <span class="keyword">not</span> find load <span class="built_in">file</span>:</span><br><span class="line">  ... <span class="comment"># 某个路径</span></span><br></pre></td></tr></table></figure>
+
+解决方法: 按照前面 <strong>编译&amp;烧录&amp;调试</strong> 小节第 1 步来配置环境变量.</li>
 </ul>
 
     </div>
@@ -256,7 +242,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/Eclipse/" rel="tag"># Eclipse</a>
+              <a href="/tags/ESP-iot-solution/" rel="tag"># ESP-iot-solution</a>
           </div>
 
         
@@ -265,13 +252,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/06/04/%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83%E6%80%BB%E7%BB%93/" rel="prev" title="编程规范总结">
-      <i class="fa fa-chevron-left"></i> 编程规范总结
+    <a href="/2021/06/23/VSCode%E4%B8%8Besp-iot-solution%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/" rel="prev" title="VSCode 下 esp-iot-solution 使用总结">
+      <i class="fa fa-chevron-left"></i> VSCode 下 esp-iot-solution 使用总结
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/06/04/Git%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/" rel="next" title="Git使用总结">
-      Git使用总结 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -330,6 +314,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.</span> <span class="nav-text">步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E4%BE%8B%E7%A8%8B"><span class="nav-number">2.1.</span> <span class="nav-text">获取例程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%B7%A5%E7%A8%8B%E6%96%87%E4%BB%B6"><span class="nav-number">2.2.</span> <span class="nav-text">获取工程文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8-Eclipse-%E4%B8%AD%E6%89%93%E5%BC%80%E4%BE%8B%E7%A8%8B"><span class="nav-number">2.3.</span> <span class="nav-text">在 Eclipse 中打开例程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%AF%91-amp-%E7%83%A7%E5%BD%95-amp-%E8%B0%83%E8%AF%95"><span class="nav-number">2.4.</span> <span class="nav-text">编译&amp;烧录&amp;调试</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#FAQ"><span class="nav-number">3.</span> <span class="nav-text">FAQ</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
