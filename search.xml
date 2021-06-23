@@ -110,31 +110,6 @@
     
     
     <entry>
-      <title>ESP32 芯片笔记</title>
-      <link href="/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/"/>
-      <url>/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/</url>
-      
-        <content type="html"><![CDATA[<h1 id="整体框架"><a href="#整体框架" class="headerlink" title="整体框架"></a>整体框架</h1><p><img src="/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/a7ab087afd3a781db9598bdaf10ad307.png" alt="截图"></p><span id="more"></span><h1 id="芯片命名"><a href="#芯片命名" class="headerlink" title="芯片命名"></a>芯片命名</h1><p><img src="/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/01befe492f4e0888c10162273d973d11.png" alt="截图"></p><h1 id="存储器"><a href="#存储器" class="headerlink" title="存储器"></a>存储器</h1><ul><li>RTC 存储器为 SRAM.</li><li>地址映射:<img src="/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/508ae36a7b80bce2989e8b5b5dd3cc25.png" alt="截图"><img src="/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/3755a491ad6a0b6f84d94b925e1e052b.png" alt="截图"><img src="/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/40e740df4e9b217fc2a3647ce43b5511.png" alt="截图"></li><li>Internal SRAM1 通过<strong>数据总线</strong>和<strong>指令总线</strong>访问的字(32位)是<strong>逆序</strong>的, 如: 0x3FFE_0000 与 0x400B_FFFC 访问到相同的字.</li><li>PRO_CPU 通过<strong>数据总线</strong>和<strong>指令总线</strong>访问 <strong>RTC FAST Memory</strong> 的字(32位)是同序的, 如: 0x3FF8_0000 与 0x400C_0000 访问到相同的字.</li><li>开启 Cache 功能后, <strong>POOL0</strong> 或者 <strong>POOL1</strong> 只作为 cache memory 使用,不能复用作为<strong>指令总线</strong>的访问区域.</li><li>每个 CPU 访问的 <strong>PID Controller</strong> 是独立的(APP_CPU 和 PRO_CPU 访问该外设同一地址的数据不同).</li><li>外设中只有 <strong>SDIO Slave</strong> 的地址空间不连续.</li><li>使用 (0x3FF40000 + n) 地址和使用 (0x60000000 + n) 地址访问的内容是相同的,其中 n = 0 ~ 0x3FFFF.</li><li>相比于通过 AHB 访问外设, CPU 通过 DPORT 访问外设效率更高. 但是 DPORT 有预测性读 (speculative read) 的特点,不能保证每一次的读访问都是真实有效的. 另外,DPORT 会打乱总线上的读写操作的先后顺序以提升性能, 这可能会导致对读写操作的先后顺序有严格要求的程序发生崩溃. 此外使用 AHB 总线读 FIFO 会出现无法预知的错误.</li></ul><h1 id="Boot"><a href="#Boot" class="headerlink" title="Boot"></a>Boot</h1><ul><li>共有 5 个 Strapping 管脚: <strong>MTDI</strong>, <strong>GPIO0</strong>, <strong>GPIO2</strong>, <strong>MTDO</strong>, <strong>GPIO5</strong>.</li><li>启动模式:<img src="/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/e2e52946387ad66208cef2e640075a21.png" alt="截图"></li></ul><h1 id="中断"><a href="#中断" class="headerlink" title="中断"></a>中断</h1><ul><li>中断结构:<img src="/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/21b5a74caa279743708dced6323ffb1c.png" alt="截图"></li><li>输入为 <strong>71</strong> 个外部中断源, 输出给每个 CPU 各自 <strong>26</strong> 个外部中断(共 <strong>52</strong> 个).</li><li>71 个中断源中, <strong>GPIO_INTERRUPT_PRO</strong> 和 <strong>GPIO_INTERRUPT_PRO_NMI</strong> 只可以分配给 <strong>PRO_CPU</strong>, <strong>GPIO_INTERRUPT_APP</strong> 和 <strong>GPIO_INTERRUPT_APP_NMI</strong> 只可以分配给 <strong>APP_CPU</strong>.</li><li>两个 CPU(PRO_CPU 和 APP_CPU)各有 <strong>32</strong> 个中断, 其中 <strong>26</strong> 个为<strong>外部中断</strong>, <strong>6</strong> 个为<strong>内部中断</strong>.</li><li>中断优先级:<img src="/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/fb19c143d8b2803c4992da3ac6c4bba8.png" alt="截图"></li><li>能够暂时屏蔽所有被分配到 CPU 的外部中断源的 <strong>NMI</strong> 中断信号.</li></ul><h1 id="复位"><a href="#复位" class="headerlink" title="复位"></a>复位</h1><ul><li>复位影响范围:<img src="/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/65d3b6e9b6ed976f14d378a2b60056d1.png" alt="截图"></li><li><strong>PRO_CPU</strong> 可以通过读取寄存器 <strong>RTC_CNTL_RESET_CAUSE_PROCPU</strong> 来获取复位源, <strong>APP_CPU</strong> 则可以通过读取寄存器 <strong>RTC_CNTL_RESET_CAUSE_APPCPU</strong> 来获取复位源.</li></ul><h1 id="时钟"><a href="#时钟" class="headerlink" title="时钟"></a>时钟</h1><ul><li>时钟源<ul><li><strong>PLL_CLK</strong>, 320 MHz 或 480 MHz 内部 PLL 时钟</li><li><strong>XTL_CLK</strong>, 2 ~ 40 MHz 外部晶振时钟</li><li><strong>XTL32K_CLK</strong>, 32 KHz 外部晶振时钟</li><li><strong>RTC8M_CLK</strong>, 8 MHz 内部时钟, 频率可调</li><li><strong>RTC8M_D256_CLK</strong> 由 RTC8M_CLK 经 256 分频所得, 频率为(RTC8M_CLK/256). 当 RTC8M_CLK 的初始频率为 8 MHz 时, 该时钟以 31.250 KHz 的频率运行</li><li><strong>RTC_CLK</strong>, 150 KHz 内部低功耗时钟, 频率可调</li><li><strong>APLL_CLK</strong>, 16 ~ 128 MHz 内部 Audio PLL 时钟</li></ul></li><li>时钟信号<ul><li>CPU 时钟.</li><li>外设时钟: <code>APB_CLK</code>, <code>REF_TICK</code>, <code>LEDC_SCLK</code>, <code>APLL_CLK</code> 和 <code>PLL_D2_CLK</code>.</li></ul></li><li>Wi-Fi 和 BT 必须在 APB_CLK 时钟源选择 PLL_CLK 下才能工作.</li></ul><h1 id="GPIO"><a href="#GPIO" class="headerlink" title="GPIO"></a>GPIO</h1><p><img src="/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/f07e5953fdc9efc24bb305f0f2ca1449.png" alt="截图"></p><ul><li>34 个 物理 GPIO pad: 0­-19, 21-­23, 25-­27, 32­-39. 其中 34-39 仅用作<strong>输入</strong>.</li><li>每个 pad 可以配置成 <strong>GPIO 功能</strong>或者<strong>直连功能</strong>.</li><li>162 个<strong>外设输入信号</strong>都可以选择任意一个 GPIO pad 的输入信号, 每个 GPIO pad 的输出信号可来自 176 个<strong>外设输出信号</strong>中的任意一个.</li><li>同一个输入 pad 上可以同时绑定多个内部输入信号, 某一个外设的输出信号可以同时从多个 pad 输出.</li><li>每个 IO pad(包括 RTC pad)都有单独的 hold 功能.</li></ul><h1 id="DPort"><a href="#DPort" class="headerlink" title="DPort"></a>DPort</h1><p>系统通过 DPort 寄存器中的配置寄存器对各个模块进行配置.</p><ul><li><strong>APP_CPU</strong> 从 ROM code 启动之后, 会跳转到 <strong>DPORT_APPCPU_BOOT_ADDR</strong> 寄存器中的地址.</li></ul><h1 id="DMA"><a href="#DMA" class="headerlink" title="DMA"></a>DMA</h1><ul><li>ESP32 中有 13 个外设都具有 DMA 功能, 这 13 个外设是: UARTn, SPIn, I2Sn、SDIO slave, SD/MMC host, EMAC, BT 和 Wi-Fi.</li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> Intern </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> ESP32 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>ESP32-S2 芯片笔记</title>
       <link href="/2021/06/16/ESP32-S2%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/"/>
       <url>/2021/06/16/ESP32-S2%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/</url>
@@ -160,6 +135,31 @@
     
     
     <entry>
+      <title>ESP32 芯片笔记</title>
+      <link href="/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/"/>
+      <url>/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/</url>
+      
+        <content type="html"><![CDATA[<h1 id="整体框架"><a href="#整体框架" class="headerlink" title="整体框架"></a>整体框架</h1><p><img src="/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/a7ab087afd3a781db9598bdaf10ad307.png" alt="截图"></p><span id="more"></span><h1 id="芯片命名"><a href="#芯片命名" class="headerlink" title="芯片命名"></a>芯片命名</h1><p><img src="/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/01befe492f4e0888c10162273d973d11.png" alt="截图"></p><h1 id="存储器"><a href="#存储器" class="headerlink" title="存储器"></a>存储器</h1><ul><li>RTC 存储器为 SRAM.</li><li>地址映射:<img src="/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/508ae36a7b80bce2989e8b5b5dd3cc25.png" alt="截图"><img src="/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/3755a491ad6a0b6f84d94b925e1e052b.png" alt="截图"><img src="/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/40e740df4e9b217fc2a3647ce43b5511.png" alt="截图"></li><li>Internal SRAM1 通过<strong>数据总线</strong>和<strong>指令总线</strong>访问的字(32位)是<strong>逆序</strong>的, 如: 0x3FFE_0000 与 0x400B_FFFC 访问到相同的字.</li><li>PRO_CPU 通过<strong>数据总线</strong>和<strong>指令总线</strong>访问 <strong>RTC FAST Memory</strong> 的字(32位)是同序的, 如: 0x3FF8_0000 与 0x400C_0000 访问到相同的字.</li><li>开启 Cache 功能后, <strong>POOL0</strong> 或者 <strong>POOL1</strong> 只作为 cache memory 使用,不能复用作为<strong>指令总线</strong>的访问区域.</li><li>每个 CPU 访问的 <strong>PID Controller</strong> 是独立的(APP_CPU 和 PRO_CPU 访问该外设同一地址的数据不同).</li><li>外设中只有 <strong>SDIO Slave</strong> 的地址空间不连续.</li><li>使用 (0x3FF40000 + n) 地址和使用 (0x60000000 + n) 地址访问的内容是相同的,其中 n = 0 ~ 0x3FFFF.</li><li>相比于通过 AHB 访问外设, CPU 通过 DPORT 访问外设效率更高. 但是 DPORT 有预测性读 (speculative read) 的特点,不能保证每一次的读访问都是真实有效的. 另外,DPORT 会打乱总线上的读写操作的先后顺序以提升性能, 这可能会导致对读写操作的先后顺序有严格要求的程序发生崩溃. 此外使用 AHB 总线读 FIFO 会出现无法预知的错误.</li></ul><h1 id="Boot"><a href="#Boot" class="headerlink" title="Boot"></a>Boot</h1><ul><li>共有 5 个 Strapping 管脚: <strong>MTDI</strong>, <strong>GPIO0</strong>, <strong>GPIO2</strong>, <strong>MTDO</strong>, <strong>GPIO5</strong>.</li><li>启动模式:<img src="/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/e2e52946387ad66208cef2e640075a21.png" alt="截图"></li></ul><h1 id="中断"><a href="#中断" class="headerlink" title="中断"></a>中断</h1><ul><li>中断结构:<img src="/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/21b5a74caa279743708dced6323ffb1c.png" alt="截图"></li><li>输入为 <strong>71</strong> 个外部中断源, 输出给每个 CPU 各自 <strong>26</strong> 个外部中断(共 <strong>52</strong> 个).</li><li>71 个中断源中, <strong>GPIO_INTERRUPT_PRO</strong> 和 <strong>GPIO_INTERRUPT_PRO_NMI</strong> 只可以分配给 <strong>PRO_CPU</strong>, <strong>GPIO_INTERRUPT_APP</strong> 和 <strong>GPIO_INTERRUPT_APP_NMI</strong> 只可以分配给 <strong>APP_CPU</strong>.</li><li>两个 CPU(PRO_CPU 和 APP_CPU)各有 <strong>32</strong> 个中断, 其中 <strong>26</strong> 个为<strong>外部中断</strong>, <strong>6</strong> 个为<strong>内部中断</strong>.</li><li>中断优先级:<img src="/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/fb19c143d8b2803c4992da3ac6c4bba8.png" alt="截图"></li><li>能够暂时屏蔽所有被分配到 CPU 的外部中断源的 <strong>NMI</strong> 中断信号.</li></ul><h1 id="复位"><a href="#复位" class="headerlink" title="复位"></a>复位</h1><ul><li>复位影响范围:<img src="/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/65d3b6e9b6ed976f14d378a2b60056d1.png" alt="截图"></li><li><strong>PRO_CPU</strong> 可以通过读取寄存器 <strong>RTC_CNTL_RESET_CAUSE_PROCPU</strong> 来获取复位源, <strong>APP_CPU</strong> 则可以通过读取寄存器 <strong>RTC_CNTL_RESET_CAUSE_APPCPU</strong> 来获取复位源.</li></ul><h1 id="时钟"><a href="#时钟" class="headerlink" title="时钟"></a>时钟</h1><ul><li>时钟源<ul><li><strong>PLL_CLK</strong>, 320 MHz 或 480 MHz 内部 PLL 时钟</li><li><strong>XTL_CLK</strong>, 2 ~ 40 MHz 外部晶振时钟</li><li><strong>XTL32K_CLK</strong>, 32 KHz 外部晶振时钟</li><li><strong>RTC8M_CLK</strong>, 8 MHz 内部时钟, 频率可调</li><li><strong>RTC8M_D256_CLK</strong> 由 RTC8M_CLK 经 256 分频所得, 频率为(RTC8M_CLK/256). 当 RTC8M_CLK 的初始频率为 8 MHz 时, 该时钟以 31.250 KHz 的频率运行</li><li><strong>RTC_CLK</strong>, 150 KHz 内部低功耗时钟, 频率可调</li><li><strong>APLL_CLK</strong>, 16 ~ 128 MHz 内部 Audio PLL 时钟</li></ul></li><li>时钟信号<ul><li>CPU 时钟.</li><li>外设时钟: <code>APB_CLK</code>, <code>REF_TICK</code>, <code>LEDC_SCLK</code>, <code>APLL_CLK</code> 和 <code>PLL_D2_CLK</code>.</li></ul></li><li>Wi-Fi 和 BT 必须在 APB_CLK 时钟源选择 PLL_CLK 下才能工作.</li></ul><h1 id="GPIO"><a href="#GPIO" class="headerlink" title="GPIO"></a>GPIO</h1><p><img src="/2021/06/16/ESP32%E8%8A%AF%E7%89%87%E7%AC%94%E8%AE%B0/f07e5953fdc9efc24bb305f0f2ca1449.png" alt="截图"></p><ul><li>34 个 物理 GPIO pad: 0­-19, 21-­23, 25-­27, 32­-39. 其中 34-39 仅用作<strong>输入</strong>.</li><li>每个 pad 可以配置成 <strong>GPIO 功能</strong>或者<strong>直连功能</strong>.</li><li>162 个<strong>外设输入信号</strong>都可以选择任意一个 GPIO pad 的输入信号, 每个 GPIO pad 的输出信号可来自 176 个<strong>外设输出信号</strong>中的任意一个.</li><li>同一个输入 pad 上可以同时绑定多个内部输入信号, 某一个外设的输出信号可以同时从多个 pad 输出.</li><li>每个 IO pad(包括 RTC pad)都有单独的 hold 功能.</li></ul><h1 id="DPort"><a href="#DPort" class="headerlink" title="DPort"></a>DPort</h1><p>系统通过 DPort 寄存器中的配置寄存器对各个模块进行配置.</p><ul><li><strong>APP_CPU</strong> 从 ROM code 启动之后, 会跳转到 <strong>DPORT_APPCPU_BOOT_ADDR</strong> 寄存器中的地址.</li></ul><h1 id="DMA"><a href="#DMA" class="headerlink" title="DMA"></a>DMA</h1><ul><li>ESP32 中有 13 个外设都具有 DMA 功能, 这 13 个外设是: UARTn, SPIn, I2Sn、SDIO slave, SD/MMC host, EMAC, BT 和 Wi-Fi.</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Intern </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ESP32 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Arduino 开发 ESP32</title>
       <link href="/2021/06/10/Arduino%E5%BC%80%E5%8F%91ESP32/"/>
       <url>/2021/06/10/Arduino%E5%BC%80%E5%8F%91ESP32/</url>
@@ -176,7 +176,7 @@
       
         <tags>
             
-            <tag> IDE </tag>
+            <tag> Arduino </tag>
             
         </tags>
       
