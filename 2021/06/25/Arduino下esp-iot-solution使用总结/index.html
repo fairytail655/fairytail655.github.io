@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="摘要本文档以 esp-iot-solution 下的 componets&#x2F;led&#x2F;light  和 componets&#x2F;button 组件为例, 将它们修改为 Arduino 库, 实现了这两个组件在 IDE 上的使用.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Arduino 下 esp-iot-solution 使用总结">
+<meta property="og:url" content="http://yoursite.com/2021/06/25/Arduino%E4%B8%8Besp-iot-solution%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="FariyBlog">
+<meta property="og:description" content="摘要本文档以 esp-iot-solution 下的 componets&#x2F;led&#x2F;light  和 componets&#x2F;button 组件为例, 将它们修改为 Arduino 库, 实现了这两个组件在 IDE 上的使用.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-06-24T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-06-25T08:40:23.861Z">
+<meta property="article:author" content="Liu Zhongwei">
+<meta property="article:tag" content="Arduino">
+<meta property="article:tag" content="ESP-iot-solution">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2021/06/25/Arduino%E4%B8%8Besp-iot-solution%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Arduino 下 esp-iot-solution 使用总结 | FariyBlog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">FariyBlog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/06/25/Arduino%E4%B8%8Besp-iot-solution%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Liu Zhongwei">
+      <meta itemprop="description" content="Embeded System | C | Espressif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FariyBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Arduino 下 esp-iot-solution 使用总结
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-06-25 00:00:00 / Modified: 16:40:23" itemprop="dateCreated datePublished" datetime="2021-06-25T00:00:00+08:00">2021-06-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Espressif/" itemprop="url" rel="index"><span itemprop="name">Espressif</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>本文档以 <strong>esp-iot-solution</strong> 下的 <em><strong>componets/led/light</strong></em>  和 <em><strong>componets/button</strong></em> 组件为例, 将它们修改为 <strong>Arduino</strong> 库, 实现了这两个组件在 <strong>IDE</strong> 上的使用.</p>
+<span id="more"></span>
+
+<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><ul>
+<li>Ubuntu 18.04</li>
+<li>Arduino 1.8.15</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/espressif/arduino-esp32">arduino-esp32</a> v2.0.0 ( 本文档采用的<a target="_blank" rel="noopener" href="https://github.com/espressif/arduino-esp32/blob/master/docs/arduino-ide/debian_ubuntu.md">配置方法</a> )</li>
+<li>esp-iot-solution <a target="_blank" rel="noopener" href="https://github.com/espressif/esp-iot-solution">master</a></li>
+</ul>
+<h1 id="componets-led-light"><a href="#componets-led-light" class="headerlink" title="componets/led/light"></a>componets/led/light</h1><h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><ol>
+<li>从 esp-iot-solution 目录中复制 <code>componets/led/light</code> 到 <code>~/Arduino/hardware/espressif/esp32/libraries</code> 下, 更名为 <code>iot_light</code>.</li>
+<li>仿照 <code>libararies</code>目录下其他库目录(如 <strong>HTTPClinet</strong>)修改 <code>iot_light</code> 目录结构, 修改如下:<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-- iot_light                <span class="meta"># 未用到的文件均删除</span></span><br><span class="line">      <span class="string">|-- examples</span></span><br><span class="line">      <span class="string">|-- src</span></span><br><span class="line">            <span class="string">|-- iot_light.h</span></span><br><span class="line">            <span class="string">|-- light_test.c</span></span><br><span class="line">            <span class="string">|-- light.c</span></span><br></pre></td></tr></table></figure></li>
+<li>复制其他库目录下的 <code>keywords.txt</code> 和 <code>library.properties</code> 到 <code>iot_light</code> 目录下, 可根据实际需要更改内容, 本文档修改如下:<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"># keywords.txt:</span><br><span class="line"></span><br><span class="line">#######################################</span><br><span class="line"># Syntax Coloring Map For light</span><br><span class="line">#######################################</span><br><span class="line"></span><br><span class="line">#######################################</span><br><span class="line"># Library (KEYWORD3)</span><br><span class="line">#######################################</span><br><span class="line"></span><br><span class="line">iot_light    KEYWORD3        RESERVED_WORD</span><br><span class="line"></span><br><span class="line">#######################################</span><br><span class="line"># Datatypes (KEYWORD1)</span><br><span class="line">#######################################</span><br><span class="line"></span><br><span class="line">light_channel_t    KEYWORD1        DATA_TYPE</span><br><span class="line"></span><br><span class="line">light_handle_t    KEYWORD1        DATA_TYPE</span><br><span class="line"></span><br><span class="line">light_duty_mode_t    KEYWORD1        DATA_TYPE</span><br><span class="line"></span><br><span class="line">#######################################</span><br><span class="line"># Methods and Functions (KEYWORD2)</span><br><span class="line">#######################################</span><br><span class="line"></span><br><span class="line">iot_light_create            KEYWORD2</span><br><span class="line">iot_light_channel_regist    KEYWORD2</span><br><span class="line">iot_light_delete            KEYWORD2</span><br><span class="line">iot_light_duty_write        KEYWORD2</span><br><span class="line">iot_light_breath_write        KEYWORD2</span><br><span class="line">iot_light_blink_starte        KEYWORD2</span><br><span class="line">iot_light_blink_stop        KEYWORD2</span><br><span class="line"></span><br><span class="line">#######################################</span><br><span class="line"># Constants (LITERAL1)</span><br><span class="line">#######################################</span><br><span class="line"></span><br><span class="line">LIGHT_SET_DUTY_DIRECTLY    LITERAL1        RESERVED_WORD_2</span><br><span class="line">LIGHT_DUTY_FADE_1S    LITERAL1        RESERVED_WORD_2</span><br><span class="line">LIGHT_DUTY_FADE_2S    LITERAL1        RESERVED_WORD_2</span><br><span class="line">LIGHT_DUTY_FADE_3S    LITERAL1        RESERVED_WORD_2</span><br><span class="line">LIGHT_DUTY_FADE_MAX    LITERAL1        RESERVED_WORD_2</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># library.properties:</span></span><br><span class="line"></span><br><span class="line"><span class="attr">name</span>=iot_light</span><br><span class="line"><span class="attr">version</span>=<span class="number">1.0</span>.<span class="number">0</span></span><br><span class="line"><span class="attr">author</span>=Liu</span><br><span class="line"><span class="attr">maintainer</span>=</span><br><span class="line"><span class="attr">sentence</span>=iot Light sentence</span><br><span class="line"><span class="attr">paragraph</span>=iot Light paragraph</span><br><span class="line"><span class="attr">category</span>=iot</span><br><span class="line"><span class="attr">url</span>=</span><br><span class="line"><span class="attr">architectures</span>=esp32</span><br></pre></td></tr></table></figure></li>
+<li>在 <code>examples</code> 下新建 <code>light_test/light_test.ino</code> (该文件和文件夹名需保持一致, 否则 <strong>Arduino IDE</strong> 的 Examples 下不会显示该例程), 最终目录结构为:<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- iot_light          </span></span><br><span class="line">      |<span class="comment">-- examples</span></span><br><span class="line">            |<span class="comment">-- light_test</span></span><br><span class="line">                  |<span class="comment">-- light_test.ino</span></span><br><span class="line">      |<span class="comment">-- src</span></span><br><span class="line">            |<span class="comment">-- iot_light.h</span></span><br><span class="line">            |<span class="comment">-- light_test.c</span></span><br><span class="line">            |<span class="comment">-- light.c</span></span><br><span class="line">      |<span class="comment">-- keywords.txt</span></span><br><span class="line">      |<span class="comment">-- library.properties</span></span><br></pre></td></tr></table></figure>
+
+ <code>light_test.ino</code> 内容如下:<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#<span class="keyword">include</span> &lt;iot_light.h&gt;</span><br><span class="line"></span><br><span class="line">void setup<span class="literal">()</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="module-access"><span class="module"><span class="identifier">Serial</span>.</span></span><span class="keyword">begin</span>(<span class="number">115200</span>);</span><br><span class="line">  <span class="module-access"><span class="module"><span class="identifier">Serial</span>.</span></span>println(<span class="string">&quot;Setup done&quot;</span>);</span><br><span class="line"></span><br><span class="line">  light_handle_t led0 = iot<span class="constructor">_light_create(LEDC_TIMER_0, LEDC_HIGH_SPEED_MODE, 5000, 1, LEDC_TIMER_13_BIT)</span>;</span><br><span class="line">  <span class="constructor">ESP_ERROR_CHECK(<span class="params">iot_light_channel_regist</span>(<span class="params">led0</span>, 0, GPIO_NUM_25, LEDC_CHANNEL_0)</span>);</span><br><span class="line">  <span class="constructor">ESP_ERROR_CHECK(<span class="params">iot_light_duty_write</span>(<span class="params">led0</span>, 0, 1&lt;&lt;5, LIGHT_SET_DUTY_DIRECTLY)</span>);</span><br><span class="line">  iot<span class="constructor">_light_breath_write(<span class="params">led0</span>, 0, 5000)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void loop<span class="literal">()</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="module-access"><span class="module"><span class="identifier">Serial</span>.</span></span>println(<span class="string">&quot;Hello world&quot;</span>);</span><br><span class="line">  delay(<span class="number">1000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><ul>
+<li>重启 Arduino IDE.</li>
+<li>点击 <code>File</code> -&gt; <code>Examples</code> -&gt; <code>iot_light</code> -&gt; <code>light_test</code>, 这时会弹出上节第 4 步预设的例程, 可以进行编译运行.</li>
+<li> 点击 <code>Sketch</code> -&gt; <code>Include Library</code> -&gt; <code>iot_light</code>, 这时会在文件中插入 <code>#include &lt;iot_light.h&gt;</code>.</li>
+</ul>
+<h1 id="componets-button"><a href="#componets-button" class="headerlink" title="componets/button"></a>componets/button</h1><h2 id="步骤-1"><a href="#步骤-1" class="headerlink" title="步骤"></a>步骤</h2><ol>
+<li><p>同 <strong>componets/led/light</strong> 步骤 1-3, 复制例程并修改目录结构, 本文档修改结果如下:</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- iot_button        </span></span><br><span class="line">      |<span class="comment">-- examples</span></span><br><span class="line">      |<span class="comment">-- src</span></span><br><span class="line">            |<span class="comment">-- button_adc.c</span></span><br><span class="line">            |<span class="comment">-- button_adc.h</span></span><br><span class="line">            |<span class="comment">-- button_gpio.c</span></span><br><span class="line">            |<span class="comment">-- button_gpio.h</span></span><br><span class="line">            |<span class="comment">-- button_test.c</span></span><br><span class="line">            |<span class="comment">-- iot_button.c</span></span><br><span class="line">            |<span class="comment">-- iot_button.h</span></span><br><span class="line">      |<span class="comment">-- keywords.txt                      # 自行修改, 不在此展示</span></span><br><span class="line">      |<span class="comment">-- library.properties                # 自行修改, 不在此展示</span></span><br></pre></td></tr></table></figure></li>
+<li><p>由于原组件采用 <code>Kconfig</code> 文件来配置一些宏定义, 而 Arduino IDE 下无法使用 <code>menuconfig</code>, 所以要手动创建头文件来定义组件中需要用到的宏. </p>
+</li>
+<li><p>本文档在 <code>src</code> 目录下新建 <code>button_config.h</code> 文件, 根据原组件的 <code>Kconfig</code> 文件修改, 内容如下:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> IOT_BUTTON_CONFIG_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> IOT_BUTTON_CONFIG_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONFIG_BUTTON_PERIOD_TIME_MS                5           # 均采用默认参数</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONFIG_BUTTON_DEBOUNCE_TICKS                2</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONFIG_BUTTON_SHORT_PRESS_TIME_MS            180</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONFIG_BUTTON_LONG_PRESS_TIME_MS            1500</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONFIG_ADC_BUTTON_MAX_CHANNEL                3</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONFIG_ADC_BUTTON_MAX_BUTTON_PER_CHANNEL    8</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONFIG_ADC_BUTTON_SAMPLE_TIMES                1</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+<p>最终目录结构如下:</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- iot_button       </span></span><br><span class="line">      |<span class="comment">-- examples</span></span><br><span class="line">      |<span class="comment">-- src</span></span><br><span class="line">            |<span class="comment">-- button_adc.c</span></span><br><span class="line">            |<span class="comment">-- button_adc.h</span></span><br><span class="line">            |<span class="comment">-- button_config.h</span></span><br><span class="line">            |<span class="comment">-- button_gpio.c</span></span><br><span class="line">            |<span class="comment">-- button_gpio.h</span></span><br><span class="line">            |<span class="comment">-- button_test.c</span></span><br><span class="line">            |<span class="comment">-- iot_button.c</span></span><br><span class="line">            |<span class="comment">-- iot_button.h</span></span><br><span class="line">      |<span class="comment">-- keywords.txt                    </span></span><br><span class="line">      |<span class="comment">-- library.properties                </span></span><br></pre></td></tr></table></figure></li>
+<li><p>在以下文件的头部添加头文件 <code>#include &quot;button_config.h&quot;</code>.</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">button_adc.<span class="keyword">c</span><span class="punctuation">,</span> button_gpio.<span class="keyword">c</span><span class="punctuation">,</span> button_test.<span class="keyword">c</span><span class="punctuation">,</span> iot_button.<span class="keyword">c</span></span><br></pre></td></tr></table></figure></li>
+<li><p>本文档没有对该组件编写 Arduino 例程.</p>
+</li>
+</ol>
+<h2 id="效果-1"><a href="#效果-1" class="headerlink" title="效果"></a>效果</h2><ul>
+<li>重启 Arduino IDE.</li>
+<li>点击 <code>Sketch</code> -&gt; <code>Include Library</code> -&gt; <code>iot_button</code>, 这时会在文件中插入以下头文件:<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;button_config.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;button_gpio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;button_adc.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iot_button.h&gt;</span></span></span><br></pre></td></tr></table></figure></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Arduino/" rel="tag"># Arduino</a>
+              <a href="/tags/ESP-iot-solution/" rel="tag"># ESP-iot-solution</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/06/23/Eclipse%E4%B8%8Besp-iot-solution%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/" rel="prev" title="Eclipse 下 esp-iot-solution 使用总结">
+      <i class="fa fa-chevron-left"></i> Eclipse 下 esp-iot-solution 使用总结
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%91%98%E8%A6%81"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83"><span class="nav-number">2.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#componets-led-light"><span class="nav-number">3.</span> <span class="nav-text">componets&#x2F;led&#x2F;light</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4"><span class="nav-number">3.1.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%88%E6%9E%9C"><span class="nav-number">3.2.</span> <span class="nav-text">效果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#componets-button"><span class="nav-number">4.</span> <span class="nav-text">componets&#x2F;button</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4-1"><span class="nav-number">4.1.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%88%E6%9E%9C-1"><span class="nav-number">4.2.</span> <span class="nav-text">效果</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Liu Zhongwei</p>
+  <div class="site-description" itemprop="description">Embeded System | C | Espressif</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liu Zhongwei</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
