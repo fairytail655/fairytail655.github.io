@@ -20,17 +20,20 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Embeded System | C | Espressif">
-<meta property="og:type" content="website">
-<meta property="og:title" content="FariyBlog">
-<meta property="og:url" content="http://yoursite.com/archives/2021/page/2/index.html">
+  <meta name="description" content="环境 Ubuntu18.04 ESP-IDF v4.3 micropython v1.16">
+<meta property="og:type" content="article">
+<meta property="og:title" content="micropython 开发 ESP32">
+<meta property="og:url" content="http://yoursite.com/2021/07/01/micropython%E5%BC%80%E5%8F%91ESP32/index.html">
 <meta property="og:site_name" content="FariyBlog">
-<meta property="og:description" content="Embeded System | C | Espressif">
+<meta property="og:description" content="环境 Ubuntu18.04 ESP-IDF v4.3 micropython v1.16">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-06-30T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-07-01T07:28:44.678Z">
 <meta property="article:author" content="Liu Zhongwei">
+<meta property="article:tag" content="MicroPython">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/archives/2021/page/2/">
+<link rel="canonical" href="http://yoursite.com/2021/07/01/micropython%E5%BC%80%E5%8F%91ESP32/">
 
 
 <script id="page-configurations">
@@ -38,12 +41,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Archive | FariyBlog</title>
+  <title>micropython 开发 ESP32 | FariyBlog</title>
   
 
 
@@ -146,154 +149,118 @@
         <div class="content-wrap">
           
 
-          <div class="content archive">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">Um..! 16 posts in total. Keep on posting.</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/07/01/micropython%E5%BC%80%E5%8F%91ESP32/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Liu Zhongwei">
+      <meta itemprop="description" content="Embeded System | C | Espressif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FariyBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          micropython 开发 ESP32
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-07-01 00:00:00 / Modified: 15:28:44" itemprop="dateCreated datePublished" datetime="2021-07-01T00:00:00+08:00">2021-07-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Espressif/" itemprop="url" rel="index"><span itemprop="name">Espressif</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
-    </div>
+        <h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><ul>
+<li>Ubuntu18.04</li>
+<li>ESP-IDF v4.3</li>
+<li>micropython v1.16</li>
+</ul>
+<span id="more"></span>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-06-10T00:00:00+08:00"
-              content="2021-06-10">
-          06-10
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/06/10/Eclipse%E4%B8%8BESP-IDF%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/" itemprop="url">
-            <span itemprop="name">Eclipse 下 ESP-IDF 使用总结</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-06-10T00:00:00+08:00"
-              content="2021-06-10">
-          06-10
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/06/10/Vscode%E4%B8%8BESP-IDF%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/" itemprop="url">
-            <span itemprop="name">Vscode 下 ESP-IDF 使用总结</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-06-08T00:00:00+08:00"
-              content="2021-06-08">
-          06-08
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/06/08/%E9%80%9A%E8%BF%87%20Doxygen+Breathe+Sphinx%20%E7%94%9F%E6%88%90%E4%BB%A3%E7%A0%81%E6%96%87%E6%A1%A3/" itemprop="url">
-            <span itemprop="name">通过 Doxygen+Breathe+Sphinx 生成代码文档</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-06-04T00:00:00+08:00"
-              content="2021-06-04">
-          06-04
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/06/04/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/" itemprop="url">
-            <span itemprop="name">Linux常用命令总结</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-06-04T00:00:00+08:00"
-              content="2021-06-04">
-          06-04
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/06/04/Git%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/" itemprop="url">
-            <span itemprop="name">Git使用总结</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-06-04T00:00:00+08:00"
-              content="2021-06-04">
-          06-04
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/06/04/%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83%E6%80%BB%E7%BB%93/" itemprop="url">
-            <span itemprop="name">编程规范总结</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
+<h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><ol>
+<li><p>获取 <strong>micropython</strong> 源码.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/micropython/micropython.git</span><br></pre></td></tr></table></figure></li>
+<li><p>配置 <strong>ESP-IDF</strong> 环境变量, 见<a target="_blank" rel="noopener" href="https://fairytail655.github.io/2021/06/18/Ubuntu%E4%B8%8BIDF&MDF%E5%A4%9A%E7%89%88%E6%9C%AC%E5%85%B1%E5%AD%98/">文档</a>.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">get_idf_43</span><br></pre></td></tr></table></figure></li>
+<li><p>编译工具.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make <span class="literal">-C</span> mpy<span class="literal">-cross</span></span><br></pre></td></tr></table></figure></li>
+<li><p>进入 <em>ports/esp32</em> 目录, 该目录本质上为一个基于 ESP-IDF 的工程.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ports/esp32</span><br><span class="line">make submodules</span><br></pre></td></tr></table></figure></li>
+<li><p>编译工程, 以下任一命令均可.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make            <span class="comment"># 执行完会生成 build-GENERIC 文件夹</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">idf.py build    <span class="comment"># 执行完会生成 build 文件夹</span></span><br></pre></td></tr></table></figure></li>
+<li><p>烧录.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make deploy     <span class="comment"># 使用 make 编译则执行此命令</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">idf.py flash    <span class="comment"># 使用 idf.py 编译则执行此命令</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/micropython/micropython/blob/master/ports/esp32/README.md">MicroPython port to the ESP32</a></li>
+</ul>
 
     </div>
-  </div>
-  
-  
-  
 
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/MicroPython/" rel="tag"># MicroPython</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/06/25/Arduino%E4%B8%8Besp-iot-solution%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/" rel="prev" title="Arduino 下 esp-iot-solution 使用总结">
+      <i class="fa fa-chevron-left"></i> Arduino 下 esp-iot-solution 使用总结
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/07/01/micropython%E4%B8%8Besp-iot-solution%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/" rel="next" title="micropython 下 esp-iot-solution 使用总结">
+      micropython 下 esp-iot-solution 使用总结 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
   
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/2021/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/archives/2021/">1</a><span class="page-number current">2</span>
-  </nav>
+  
+  
 
 
 
@@ -345,6 +312,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="nav-number">3.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
